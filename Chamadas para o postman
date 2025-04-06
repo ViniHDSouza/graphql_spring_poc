@@ -1,0 +1,49 @@
+mutation {
+  adicionarLivro(titulo: "Domain-Driven Design", autor: "Eric Evans") {
+    id
+    titulo
+    autor
+  }
+}
+
+mutation {
+  adicionarColecaoDeLivros(livros: [
+    { titulo: "Clean Code", autor: "Robert Martin" },
+    { titulo: "Refactoring", autor: "Martin Fowler" },
+    { titulo: "Design Patterns", autor: "Erich Gamma" }
+  ]) {
+    id
+    titulo
+    autor
+  }
+}
+
+mutation {
+    atualizarLivro(
+        id: 4
+        titulo: "nao sei"
+        autor: "Gene Kim, Kevin Behr, George Spafford"
+    ) {
+        titulo
+        autor
+    }
+}
+
+
+mutation {
+  deletarLivro(id: 2)
+}
+
+query {
+  buscarTodos {
+    id
+    titulo
+  }
+}
+
+
+query {
+  buscarTodos {
+    titulo
+  }
+}

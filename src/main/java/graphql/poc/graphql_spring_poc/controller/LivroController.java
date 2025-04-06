@@ -16,27 +16,32 @@ public class LivroController {
 
     private final LivroRepository livroRepository;
 
+    // Injeção de dependência do repositório para acesso aos dados dos livros
     public LivroController(LivroRepository livroRepository) {
         this.livroRepository = livroRepository;
     }
 
     // --- QUERIES ---
+    // Endpoint GraphQL para buscar um livro pelo seu ID.
     @QueryMapping
     public Livro buscarPorId(@Argument Long id) {
         return livroRepository.findById(id).orElse(null);
     }
 
+    // Endpoint GraphQL para listar todos os livros cadastrados.
     @QueryMapping
     public List<Livro> buscarTodos() {
         return livroRepository.findAll();
     }
 
+    // Endpoint GraphQL para buscar livros de acordo com o autor.
     @QueryMapping
     public List<Livro> buscarPorAutor(@Argument String autor) {
         return livroRepository.findByAutor(autor);
     }
 
     // --- MUTATIONS ---
+    // Endpoint GraphQL para adicionar um novo livro utilizando título e autor.
     @MutationMapping
     public Livro adicionarLivro(@Argument String titulo, @Argument String autor) {
         Livro novoLivro = new Livro();
@@ -45,6 +50,7 @@ public class LivroController {
         return livroRepository.save(novoLivro);
     }
 
+    // Endpoint para atualizar os dados de um livro existente.
     @MutationMapping
     public Livro atualizarLivro(
             @Argument Long id,
@@ -53,6 +59,7 @@ public class LivroController {
     ) {
         return livroRepository.findById(id)
                 .map(livro -> {
+                    // Atualiza os campos se os novos valores forem informados.
                     if (titulo != null) livro.setTitulo(titulo);
                     if (autor != null) livro.setAutor(autor);
                     return livroRepository.save(livro);
@@ -60,6 +67,7 @@ public class LivroController {
                 .orElse(null);
     }
 
+    // Endpoint para deletar um livro pelo ID.
     @MutationMapping
     public Boolean deletarLivro(@Argument Long id) {
         if (livroRepository.existsById(id)) {
@@ -68,9 +76,12 @@ public class LivroController {
         }
         return false;
     }
+
+    // Endpoint para adicionar uma coleção de livros.
+    // A lista de LivroInput é validada (com @Valid) para garantir que os campos obrigatórios estejam preenchidos.
     @MutationMapping
     public List<Livro> adicionarColecaoDeLivros(
-            @Argument @Valid List<LivroInput> livros // Valida cada item da lista
+            @Argument @Valid List<LivroInput> livros
     ) {
         List<Livro> novosLivros = livros.stream()
                 .map(input -> new Livro(null, input.getTitulo(), input.getAutor()))
