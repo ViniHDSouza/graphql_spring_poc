@@ -1,0 +1,24 @@
+input LivroInput {
+    titulo: String!
+    autor: String!
+}
+
+type Livro {
+    id: ID!
+    titulo: String!
+    autor: String!
+}
+
+type Query {
+    buscarPorId(id: ID!): Livro
+    buscarTodos: [Livro!]!
+    buscarPorAutor(autor: String!): [Livro!]!
+}
+
+type Mutation {
+    adicionarLivro(titulo: String!, autor: String): Livro!
+    atualizarLivro(id: ID!, titulo: String!, autor: String): Livro
+    deletarLivro(id: ID!): Boolean
+    adicionarColecaoDeLivros(livros: [LivroInput!]!): [Livro!]!
+}
+
