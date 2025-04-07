@@ -47,3 +47,17 @@ query {
     titulo
   }
 }
+
+query {
+  buscarPorAutor(autor: "Eric Evans") {
+    id
+    titulo
+  }
+}
+
+query {
+  buscarPorId(id: 1) {  # Substitua pelo ID real
+    titulo
+    autor
+  }
+}
