@@ -118,6 +118,4 @@ No arquivo `LivroController.java`, os comentários ajudam a entender os seguinte
    
 ## Conclusão
 
-Este projeto demonstra de forma simples e prática como integrar o GraphQL com Spring Boot para construir APIs flexíveis e eficientes. Ele serve como base para quem deseja aprofundar seus conhecimentos em GraphQL e explorar suas potencialidades na construção de APIs modernas.
-
-Sinta-se à vontade para explorar, modificar e expandir o projeto conforme suas necessidades de aprendizado!
+Este projeto demonstra de forma simples e prática como integrar o GraphQL com Spring Boot para construir APIs flexíveis e eficientes.
